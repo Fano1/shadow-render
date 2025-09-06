@@ -1,15 +1,15 @@
-# Use lightweight Alpine base
-FROM alpine:3.17
+# Use Debian slim
+FROM debian:bookworm-slim
 
-# Install Shadowsocks-libev
-RUN apk add --no-cache shadowsocks-libev
+# Install Shadowsocks
+RUN apt-get update && apt-get install -y shadowsocks-libev && rm -rf /var/lib/apt/lists/*
 
-# Expose default Shadowsocks port (can be overridden by Render)
+# Expose default port
 EXPOSE 8388
 
-# Use environment variable for password (set in Render dashboard)
+# Set environment variables for easy config
 ENV PASSWORD=ChangeThisPassword
 ENV PORT=8388
 
-# Start Shadowsocks server in foreground
+# Start server
 CMD ss-server -s 0.0.0.0 -p $PORT -k $PASSWORD -m aes-256-gcm -v
