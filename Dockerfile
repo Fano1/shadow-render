@@ -1,5 +1,5 @@
 # Use lightweight Alpine base
-FROM alpine:3.18
+FROM alpine:3.17
 
 # Install Shadowsocks-libev
 RUN apk add --no-cache shadowsocks-libev
